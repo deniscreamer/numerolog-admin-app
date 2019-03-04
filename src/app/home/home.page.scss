@@ -1,0 +1,12 @@
+.welcome-card ion-img {
+  max-height: 35vh;
+  overflow: hidden;
+}
+
+.card-remove-inner-padding {
+  --inner-padding-end: 0px;
+}
+
+.card-content-ios {
+  padding-top: 5px !important;
+}
