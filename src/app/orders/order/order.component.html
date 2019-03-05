@@ -1,0 +1,229 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Назад" defaultHref="orders"></ion-back-button>
+    </ion-buttons>
+    <ion-title>12.01.2019 13:00</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!-- welcome card  -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-grid>
+          <ion-row justify-content-center>
+            <ion-col size="12" text-center>
+              <div>{{ select }}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ng-container *ngIf="select == 'Предназначение'">
+        <ion-list>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary">ФИО</ion-label>
+            <ion-input type="text" value="Иванова Татьяна Ивановна"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Новая Фамилия</ion-label
+            >
+            <ion-input type="text" value="Сидорова"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Взяла у мужа</ion-label
+            >
+            <ion-input type="text" value="Да"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Дата рождения по паспорту</ion-label
+            >
+            <ion-input type="text" value="21.01.1990 01:00"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Настоящая Дата рождения</ion-label
+            >
+            <ion-input type="text" value="22.01.1990"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Город и Страна рождения</ion-label
+            >
+            <ion-input type="text" value="Краснодар Россия"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Дата клинической смерти или комы</ion-label
+            >
+            <ion-input type="text" value="23.01.2002"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Whatsapp или Instagram</ion-label
+            >
+            <ion-input type="text" value="+79991112233 tataya90"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Дата консультации</ion-label
+            >
+            <ion-datetime
+              displayFormat="DDDD MMM D, YYYY"
+              [(ngModel)]="myDate"
+              doneText="Сохранить"
+              cancelText="Отмена"
+              (ionChange)="editedToggle()"
+            ></ion-datetime>
+          </ion-item>
+
+          <ion-grid>
+            <ion-row justify-content-center>
+              <ion-col size="6" text-center>
+                <ion-item
+                  text-wrap
+                  class="card-remove-inner-padding"
+                  no-padding
+                >
+                  <ion-label position="stacked" color="primary">С</ion-label>
+                  <ion-datetime
+                    displayFormat="HH:00"
+                    [(ngModel)]="timeat"
+                    doneText="Сохранить"
+                    cancelText="Отмена"
+                    (ionChange)="editedToggle()"
+                  ></ion-datetime>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6" text-center>
+                <ion-item
+                  text-wrap
+                  class="card-remove-inner-padding"
+                  no-padding
+                >
+                  <ion-label position="stacked" color="primary">До</ion-label>
+                  <ion-datetime
+                    displayFormat="HH:00"
+                    [(ngModel)]="timeto"
+                    doneText="Сохранить"
+                    cancelText="Отмена"
+                    (ionChange)="editedToggle()"
+                  ></ion-datetime>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-list>
+      </ng-container>
+      <ng-container *ngIf="select == 'Взаимоотношения'">
+        <ion-list>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary">ФИО</ion-label>
+            <ion-input type="text" value="Иванова Татьяна Ивановна"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Новая Фамилия</ion-label
+            >
+            <ion-input type="text" value="Сидорова"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Взяла у мужа</ion-label
+            >
+            <ion-input type="text" value="Да"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Дата рождения по паспорту</ion-label
+            >
+            <ion-input type="text" value="21.01.1990 01:00"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Настоящая Дата рождения</ion-label
+            >
+            <ion-input type="text" value="22.01.1990"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Город и Страна рождения</ion-label
+            >
+            <ion-input type="text" value="Краснодар Россия"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Дата клинической смерти или комы</ion-label
+            >
+            <ion-input type="text" value="23.01.2002"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Whatsapp или Instagram</ion-label
+            >
+            <ion-input type="text" value="+79991112233 tataya90"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ng-container>
+      <ng-container *ngIf="select == 'Детская'">
+        <ion-list>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary">ФИО</ion-label>
+            <ion-input type="text" value="Иванова Татьяна Ивановна"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Новая Фамилия</ion-label
+            >
+            <ion-input type="text" value="Сидорова"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Взяла у мужа</ion-label
+            >
+            <ion-input type="text" value="Да"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Дата рождения по паспорту</ion-label
+            >
+            <ion-input type="text" value="21.01.1990 01:00"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Настоящая Дата рождения</ion-label
+            >
+            <ion-input type="text" value="22.01.1990"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Город и Страна рождения</ion-label
+            >
+            <ion-input type="text" value="Краснодар Россия"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Дата клинической смерти или комы</ion-label
+            >
+            <ion-input type="text" value="23.01.2002"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Whatsapp или Instagram</ion-label
+            >
+            <ion-input type="text" value="+79991112233 tataya90"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ng-container>
+      <ion-button *ngIf="editedFlag" expand="block" color="primary"
+        >Записать</ion-button
+      >
+    </ion-card-content>
+  </ion-card>
+  <!-- //welcome card  -->
+</ion-content>

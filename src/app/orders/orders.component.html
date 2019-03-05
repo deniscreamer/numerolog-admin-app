@@ -1,3 +1,83 @@
-<p>
-  orders works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Консультации
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <!-- welcome card  -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle text-center>Все консультации</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item
+          button
+          class="card-remove-inner-padding"
+          no-padding
+          (click)="pushPage(1)"
+          [routerDirection]="'forward'"
+        >
+          <ion-label>Иванова Татьяна Александровна</ion-label>
+          <ion-badge slot="end" color="success">11.04.19 </ion-badge>
+        </ion-item>
+        <ion-item
+          button
+          class="card-remove-inner-padding"
+          no-padding
+          (click)="pushPage(2)"
+          [routerDirection]="'forward'"
+        >
+          <ion-label>Сидорова Василиса Геннадьевна</ion-label>
+          <ion-badge slot="end" color="success">11.04.19</ion-badge>
+        </ion-item>
+        <ion-item button class="card-remove-inner-padding" no-padding>
+          <ion-label>Иванова Татьяна Александровна</ion-label>
+          <ion-badge slot="end" color="success">11.04.19</ion-badge>
+        </ion-item>
+        <ion-item button class="card-remove-inner-padding" no-padding>
+          <ion-label>Сидорова Василиса Геннадьевна</ion-label>
+          <ion-badge slot="end" color="success">11.04.19</ion-badge>
+        </ion-item>
+        <ion-item button class="card-remove-inner-padding" no-padding>
+          <ion-label>Иванова Татьяна Александровна</ion-label>
+          <ion-badge slot="end" color="success">11.04.19</ion-badge>
+        </ion-item>
+        <ion-item button class="card-remove-inner-padding" no-padding>
+          <ion-label>Сидорова Василиса Геннадьевна</ion-label>
+          <ion-badge slot="end" color="success">11.04.19</ion-badge>
+        </ion-item>
+        <ion-item button class="card-remove-inner-padding" no-padding>
+          <ion-label>Иванова Татьяна Александровна</ion-label>
+          <ion-badge slot="end" color="success">11.04.19</ion-badge>
+        </ion-item>
+        <ion-item button class="card-remove-inner-padding" no-padding>
+          <ion-label>Сидорова Василиса Геннадьевна</ion-label>
+          <ion-badge slot="end" color="success">11.04.19</ion-badge>
+        </ion-item>
+        <ion-item button class="card-remove-inner-padding" no-padding>
+          <ion-label>Иванова Татьяна Александровна</ion-label>
+          <ion-badge slot="end" color="success">11.04.19</ion-badge>
+        </ion-item>
+        <ion-item button class="card-remove-inner-padding" no-padding>
+          <ion-label>Сидорова Василиса Геннадьевна</ion-label>
+          <ion-badge slot="end" color="success">11.04.19</ion-badge>
+        </ion-item>
+        <ion-item button class="card-remove-inner-padding" no-padding>
+          <ion-label>Иванова Татьяна Александровна</ion-label>
+          <ion-badge slot="end" color="success">11.04.19</ion-badge>
+        </ion-item>
+        <ion-item button class="card-remove-inner-padding" no-padding>
+          <ion-label>Сидорова Василиса Геннадьевна</ion-label>
+          <ion-badge slot="end" color="success">11.04.19</ion-badge>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <!-- //welcome card  -->
+</ion-content>

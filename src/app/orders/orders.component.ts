@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-orders',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdersComponent implements OnInit {
 
-  constructor() { }
+  constructor(private navCtrl: NavController) {}
 
   ngOnInit() {}
+
+  pushPage(id: number) {
+    this.navCtrl.navigateForward('/orders/' + id);
+  }
 
 }

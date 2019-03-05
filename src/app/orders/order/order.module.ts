@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { OrderComponent } from './order.component';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
-import { OrdersComponent } from './orders.component';
 import { RouterModule } from '@angular/router';
+
 
 @NgModule({
   declarations: [
-    OrdersComponent
+    OrderComponent
   ],
   imports: [
     CommonModule,
@@ -17,9 +17,9 @@ import { RouterModule } from '@angular/router';
     RouterModule.forChild([
       {
         path: '',
-        component: OrdersComponent
+        component: OrderComponent
       }
     ])
   ]
 })
-export class OrdersModule { }
+export class OrderModule { }
