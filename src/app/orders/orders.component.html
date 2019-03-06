@@ -32,6 +32,7 @@
             (click)="pushPage(order.id, idx)"
             [routerDirection]="'forward'"
           >
+            <ion-icon *ngIf="onIsAfter(order.date)" name="checkmark"></ion-icon>
             <ion-label>{{ order.fio }}</ion-label>
             <ion-badge
               slot="end"

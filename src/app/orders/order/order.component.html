@@ -3,7 +3,9 @@
     <ion-buttons slot="start">
       <ion-back-button text="Назад" (click)="onBack()"></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ order.date | date:'dd.MM.yyyy' }} {{ order.timeat }}</ion-title>
+    <ion-title
+      >{{ order.date | date: 'dd.MM.yyyy' }} {{ order.timeat }}</ion-title
+    >
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -190,14 +192,19 @@
       <ion-grid>
         <ion-row justify-content-center>
           <ion-col size="6" text-center>
-            <ion-button expand="block" color="danger" (click)="deleteOrder(id)"
+            <ion-button
+              expand="block"
+              color="danger"
+              (click)="onDeleteOrder(id)"
               >Удалить</ion-button
             >
           </ion-col>
           <ion-col size="6" text-center>
-            <ion-button expand="block" color="primary"
-              ><span *ngIf="order.date">Оплачено</span
-              ><span *ngIf="!order.date">Записать</span></ion-button
+            <ion-button
+              expand="block"
+              color="primary"
+              (click)="onUpdateOrder(id)"
+              >Подтвердить</ion-button
             >
           </ion-col>
         </ion-row>

@@ -35,6 +35,14 @@ export class OrdersService {
     );
   }
 
+  public updateOrder(id: number, data: any): Observable<any> {
+    const url = `${API_URL}/${id}`;
+    return this.http.put<any>(url, data).pipe(
+      tap(() => console.log(`update from orders by id = ${id}`)),
+      catchError(this.handleError('updateOrder'))
+    );
+  }
+
   public deleteOrder(id: number): Observable<any> {
     const url = `${API_URL}/${id}`;
     return this.http.delete<any>(url, httpOptions).pipe(

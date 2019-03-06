@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { OrdersService } from '../orders.service';
+import * as moment from 'moment/moment';
+import 'moment/locale/ru';
 
 @Component({
   selector: 'app-order',
@@ -12,7 +14,7 @@ export class OrderComponent implements OnInit {
   order: any = {};
   id: any;
 
-  editedFlag = false;
+  moment = moment();
 
   constructor(
     public navCtrl: NavController,
@@ -21,20 +23,34 @@ export class OrderComponent implements OnInit {
   ) {
     this.id = this.AcRoute.snapshot.paramMap.get('id');
     this.order = this.ordersService.selectedOrder;
-    if (!this.order) { this.order = { select: 'Нет данных' }; }
+    if (!this.order) {
+      this.order = { select: 'Нет данных' };
+    }
   }
 
   ngOnInit() {}
 
   onChangeTime() {
-    this.editedFlag = true;
-    this.order.timeto = (+(this.order.timeat.split(':')[0]) + 1) + ':00';
+    this.order.timeto = +this.order.timeat.split(':')[0] + 1 + ':00';
   }
 
-  deleteOrder(id: number) {
+  onDeleteOrder(id: number) {
     this.ordersService.deleteOrder(id).subscribe(
       result => {
         this.ordersService.deleteOrderEmit(id);
+        this.onBack();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  onUpdateOrder(id: number) {
+    this.order.date = moment(this.order.date).format();
+    this.order.payed = true;
+    this.ordersService.updateOrder(id, this.order).subscribe(
+      result => {
         this.onBack();
       },
       err => {

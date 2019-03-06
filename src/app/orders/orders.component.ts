@@ -55,4 +55,16 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     this.ordersService.selectedOrder = this.orders[idArray];
     this.navCtrl.navigateForward('/orders/' + id);
   }
+
+  onIsAfter(date: any) {
+    if (date) {
+      if (moment(moment.now()).isAfter(moment(date))) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
 }
