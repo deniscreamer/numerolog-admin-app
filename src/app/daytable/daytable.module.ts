@@ -19,6 +19,7 @@ import { DaytableComponent } from './daytable.component';
         component: DaytableComponent
       }
     ])
-  ]
+  ],
+  providers: []
 })
 export class DaytableModule { }

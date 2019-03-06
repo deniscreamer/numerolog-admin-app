@@ -1,19 +1,40 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>
-        Расписание
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-      <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle text-center>14.01.2018</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Расписание
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-spinner *ngIf="loadingData" name="dots"></ion-spinner>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content text-center>
+  <ion-spinner *ngIf="loading" name="crescent" margin-top></ion-spinner>
+  <ng-container *ngIf="!loading">
+    <ion-card *ngFor="let day of dayTable; let idx = index">
+      <ion-card-header>
+        <ion-card-subtitle text-center
+          >{{ day.date | date: 'dd.MM.yyyy' }}
+          <ion-icon name="calendar"></ion-icon>
+          {{ day.weekday }}</ion-card-subtitle
+        >
+      </ion-card-header>
+      <ion-card-content class="padding-top-0" no-padding>
+        <ion-card
+          *ngFor="let time of day.times"
+          class="mt-1 mb-1"
+          [color]="!time.free ? 'danger' : 'secondary'"
+          (click)="onStatusChange(idx, day.id, time.time_at, time.time_to)"
+        >
+          <ion-card-content text-center>
+            {{ time.time_at }} <ion-icon name="arrow-round-forward"></ion-icon>
+            {{ time.time_to }}
           </ion-card-content>
         </ion-card>
-  </ion-content>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+</ion-content>
