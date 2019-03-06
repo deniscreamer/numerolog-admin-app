@@ -7,13 +7,20 @@
       Расписание
     </ion-title>
     <ion-buttons slot="end">
-      <ion-spinner *ngIf="loadingData" name="dots"></ion-spinner>
+      <ion-spinner *ngIf="isLoadingData" name="dots"></ion-spinner>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content text-center>
-  <ion-spinner *ngIf="loading" name="crescent" margin-top></ion-spinner>
-  <ng-container *ngIf="!loading">
+  <ng-container *ngIf="isLoading">
+    <ion-spinner
+      name="crescent"
+      [paused]="isPauseSpinner"
+      margin-top
+    ></ion-spinner>
+  </ng-container>
+
+  <ng-container *ngIf="!isLoading">
     <ion-card *ngFor="let day of dayTable; let idx = index">
       <ion-card-header>
         <ion-card-subtitle text-center

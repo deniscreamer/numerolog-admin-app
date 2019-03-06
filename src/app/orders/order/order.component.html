@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button text="Назад" defaultHref="orders"></ion-back-button>
+      <ion-back-button text="Назад" (click)="onBack()"></ion-back-button>
     </ion-buttons>
-    <ion-title>12.01.2019 13:00</ion-title>
+    <ion-title>{{ order.date | date:'dd.MM.yyyy' }} {{ order.timeat }}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -14,7 +14,7 @@
         <ion-grid>
           <ion-row justify-content-center>
             <ion-col size="12" text-center>
-              <div>{{ select }}</div>
+              <div>{{ order.select }}</div>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -22,55 +22,86 @@
     </ion-card-header>
     <ion-card-content>
       <ion-list>
-        <ng-container *ngIf="select == 'Предназначение'">
+        <ng-container *ngIf="order.select == 'Предназначение'">
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
             <ion-label position="stacked" color="primary">ФИО</ion-label>
-            <ion-input type="text" value="Иванова Татьяна Ивановна"></ion-input>
+            <ion-input type="text" [value]="order.fio"></ion-input>
           </ion-item>
-          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+          <ion-item
+            *ngIf="order.fio_chbox"
+            text-wrap
+            class="card-remove-inner-padding"
+            no-padding
+          >
             <ion-label position="stacked" color="primary"
               >Новая Фамилия</ion-label
             >
-            <ion-input type="text" value="Сидорова"></ion-input>
+            <ion-input type="text" [value]="order.fio_now"></ion-input>
           </ion-item>
-          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+          <ion-item
+            *ngIf="order.fio_chbox"
+            text-wrap
+            class="card-remove-inner-padding"
+            no-padding
+          >
             <ion-label position="stacked" color="primary"
               >Взяла у мужа</ion-label
             >
-            <ion-input type="text" value="Да"></ion-input>
+            <ion-input
+              type="text"
+              [value]="order.fio_chbox_husband_chbox ? 'Да' : 'Нет'"
+            ></ion-input>
           </ion-item>
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
             <ion-label position="stacked" color="primary"
               >Дата рождения по паспорту</ion-label
             >
-            <ion-input type="text" value="21.01.1990 01:00"></ion-input>
+            <ion-input
+              type="text"
+              [value]="order.birth_date + ' ' + order.birth_time"
+            ></ion-input>
           </ion-item>
-          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+          <ion-item
+            *ngIf="order.birth_chbox"
+            text-wrap
+            class="card-remove-inner-padding"
+            no-padding
+          >
             <ion-label position="stacked" color="primary"
               >Настоящая Дата рождения</ion-label
             >
-            <ion-input type="text" value="22.01.1990"></ion-input>
+            <ion-input
+              type="text"
+              [value]="
+                order.birth_chbox_realdate + ' ' + order.birth_chbox_realtime
+              "
+            ></ion-input>
           </ion-item>
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
             <ion-label position="stacked" color="primary"
               >Город и Страна рождения</ion-label
             >
-            <ion-input type="text" value="Краснодар Россия"></ion-input>
+            <ion-input type="text" [value]="order.from_city"></ion-input>
           </ion-item>
-          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+          <ion-item
+            *ngIf="order.clinic_die_chbox"
+            text-wrap
+            class="card-remove-inner-padding"
+            no-padding
+          >
             <ion-label position="stacked" color="primary"
               >Дата клинической смерти или комы</ion-label
             >
-            <ion-input type="text" value="23.01.2002"></ion-input>
+            <ion-input type="text" [value]="order.clinic_die_date"></ion-input>
           </ion-item>
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
             <ion-label position="stacked" color="primary"
               >Whatsapp или Instagram</ion-label
             >
-            <ion-input type="text" value="+79991112233 tataya90"></ion-input>
+            <ion-input type="text" [value]="order.contacts"></ion-input>
           </ion-item>
         </ng-container>
-        <ng-container *ngIf="select == 'Взаимоотношения'">
+        <ng-container *ngIf="order.select == 'Взаимоотношения'">
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
             <ion-label position="stacked" color="primary">ФИО</ion-label>
             <ion-input type="text" value="Иванова Татьяна Ивановна"></ion-input>
@@ -109,7 +140,7 @@
             <ion-input type="text" value="+79991112233 tataya90"></ion-input>
           </ion-item>
         </ng-container>
-        <ng-container *ngIf="select == 'Детская'">
+        <ng-container *ngIf="order.select == 'Детская'">
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
             <ion-label position="stacked" color="primary">Раздел</ion-label>
             <ion-input type="text" value="В разработке"></ion-input>
@@ -121,11 +152,10 @@
             >Дата консультации</ion-label
           >
           <ion-datetime
-            displayFormat="DDDD MMM D, YYYY"
-            [(ngModel)]="myDate"
+            displayFormat="DD.MM.YYYY"
+            [(ngModel)]="order.date"
             doneText="Сохранить"
             cancelText="Отмена"
-            (ionChange)="editedToggle()"
           ></ion-datetime>
         </ion-item>
 
@@ -136,10 +166,10 @@
                 <ion-label position="stacked" color="primary">С</ion-label>
                 <ion-datetime
                   displayFormat="HH:00"
-                  [(ngModel)]="timeat"
+                  [(ngModel)]="order.timeat"
                   doneText="Сохранить"
                   cancelText="Отмена"
-                  (ionChange)="editedToggle()"
+                  (ionChange)="onChangeTime()"
                 ></ion-datetime>
               </ion-item>
             </ion-col>
@@ -148,20 +178,30 @@
                 <ion-label position="stacked" color="primary">До</ion-label>
                 <ion-datetime
                   displayFormat="HH:00"
-                  [(ngModel)]="timeto"
+                  [(ngModel)]="order.timeto"
                   doneText="Сохранить"
                   cancelText="Отмена"
-                  (ionChange)="editedToggle()"
                 ></ion-datetime>
               </ion-item>
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-list>
-
-      <ion-button *ngIf="editedFlag" expand="block" color="primary"
-        >Записать</ion-button
-      >
+      <ion-grid>
+        <ion-row justify-content-center>
+          <ion-col size="6" text-center>
+            <ion-button expand="block" color="danger" (click)="deleteOrder(id)"
+              >Удалить</ion-button
+            >
+          </ion-col>
+          <ion-col size="6" text-center>
+            <ion-button expand="block" color="primary"
+              ><span *ngIf="order.date">Оплачено</span
+              ><span *ngIf="!order.date">Записать</span></ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
   <!-- //welcome card  -->

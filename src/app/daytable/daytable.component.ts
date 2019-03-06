@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { DayTable } from './daytable.model';
 import { DayTableService } from './daytable.service';
 import { delay, map, filter } from 'rxjs/operators';
@@ -10,10 +10,11 @@ import 'moment/locale/ru';
   templateUrl: './daytable.component.html',
   styleUrls: ['./daytable.component.scss'],
 })
-export class DaytableComponent implements OnInit {
+export class DaytableComponent implements OnInit, AfterViewInit {
   dayTable: DayTable[] = [];
-  loading = true;
-  loadingData = false;
+  isPauseSpinner = true;
+  isLoading = true;
+  isLoadingData = false;
   moment = moment();
 
   constructor(private dayTableService: DayTableService) {
@@ -21,22 +22,29 @@ export class DaytableComponent implements OnInit {
       .getDayTables()
       .pipe(
         delay(1000),
-        map(x => x.filter(this.onFilterDates)) // delete old dates
+        map(x => x.filter(this.onFilterDates)) // delete old dates (from today)
       )
       .subscribe(
         result => {
           this.dayTable = result;
           console.log(result);
-          this.loading = false;
+          this.isLoading = false;
         },
         err => {
           console.log(err);
-          this.loading = false;
+          this.isLoading = false;
         }
       );
   }
 
   ngOnInit() {}
+
+  ngAfterViewInit() {
+    /* This is hack to fix spinner paused after load page */
+    setTimeout(() => {
+      this.isPauseSpinner = false;
+    }, 250);
+  }
 
   onStatusChange(
     idx: number,
@@ -44,7 +52,7 @@ export class DaytableComponent implements OnInit {
     time_at: string,
     time_to: string
   ) {
-    this.loadingData = true;
+    this.isLoadingData = true;
     const findedTimeId = this.dayTable[idx].times.findIndex(
       x => x.time_at === time_at
     );
@@ -53,20 +61,18 @@ export class DaytableComponent implements OnInit {
     this.dayTable[idx].times = findedTimeObject;
     this.dayTableService.updateDayTable(day_id, this.dayTable[idx]).subscribe(
       res => {
-        this.loadingData = false;
+        this.isLoadingData = false;
       },
       err => {
         console.log(err);
         findedTimeObject[findedTimeId].free = !findedTimeObject[findedTimeId]
           .free;
-        this.loadingData = false;
+        this.isLoadingData = false;
       }
     );
   }
 
-  onFilterDates(date: DayTable, days: number = 4) {
-    return moment(moment.now())
-      .add(days, 'days')
-      .isBefore(date.date);
+  onFilterDates(date: DayTable) {
+    return moment(moment.now()).isBefore(date.date);
   }
 }
