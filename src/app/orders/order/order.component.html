@@ -106,7 +106,7 @@
         <ng-container *ngIf="order.select == 'Взаимоотношения'">
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
             <ion-label position="stacked" color="primary">ФИО</ion-label>
-            <ion-input type="text" value="Иванова Татьяна Ивановна"></ion-input>
+            <ion-input type="text" [value]="order.fio"></ion-input>
           </ion-item>
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
             <ion-label position="stacked" color="primary"
@@ -114,32 +114,32 @@
             >
             <ion-input
               type="text"
-              value="Сидоров Александр Васильевич"
+              [value]="order.fio_partner"
             ></ion-input>
           </ion-item>
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
             <ion-label position="stacked" color="primary"
               >Дата рождения</ion-label
             >
-            <ion-input type="text" value="21.01.1992 01:00"></ion-input>
+            <ion-input type="text" [value]="order.birth_date + ' ' + order.birth_time"></ion-input>
           </ion-item>
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
             <ion-label position="stacked" color="primary"
               >Дата рождения партнера</ion-label
             >
-            <ion-input type="text" value="13.11.1985"></ion-input>
+            <ion-input type="text" [value]="order.birth_date_partner + ' ' + order.birth_time_partner"></ion-input>
           </ion-item>
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
             <ion-label position="stacked" color="primary"
               >Состоят в браке</ion-label
             >
-            <ion-input type="text" value="Да"></ion-input>
+            <ion-input type="text" [value]="order.married ? 'Да' : 'Нет'"></ion-input>
           </ion-item>
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
             <ion-label position="stacked" color="primary"
               >Whatsapp или Instagram</ion-label
             >
-            <ion-input type="text" value="+79991112233 tataya90"></ion-input>
+            <ion-input type="text" [value]="order.contacts"></ion-input>
           </ion-item>
         </ng-container>
         <ng-container *ngIf="order.select == 'Детская'">
