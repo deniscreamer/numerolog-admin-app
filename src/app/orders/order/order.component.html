@@ -112,28 +112,36 @@
             <ion-label position="stacked" color="primary"
               >ФИО Партнера</ion-label
             >
-            <ion-input
-              type="text"
-              [value]="order.fio_partner"
-            ></ion-input>
+            <ion-input type="text" [value]="order.fio_partner"></ion-input>
           </ion-item>
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
             <ion-label position="stacked" color="primary"
               >Дата рождения</ion-label
             >
-            <ion-input type="text" [value]="order.birth_date + ' ' + order.birth_time"></ion-input>
+            <ion-input
+              type="text"
+              [value]="order.birth_date + ' ' + order.birth_time"
+            ></ion-input>
           </ion-item>
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
             <ion-label position="stacked" color="primary"
               >Дата рождения партнера</ion-label
             >
-            <ion-input type="text" [value]="order.birth_date_partner + ' ' + order.birth_time_partner"></ion-input>
+            <ion-input
+              type="text"
+              [value]="
+                order.birth_date_partner + ' ' + order.birth_time_partner
+              "
+            ></ion-input>
           </ion-item>
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
             <ion-label position="stacked" color="primary"
               >Состоят в браке</ion-label
             >
-            <ion-input type="text" [value]="order.married ? 'Да' : 'Нет'"></ion-input>
+            <ion-input
+              type="text"
+              [value]="order.married ? 'Да' : 'Нет'"
+            ></ion-input>
           </ion-item>
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
             <ion-label position="stacked" color="primary"
@@ -142,13 +150,59 @@
             <ion-input type="text" [value]="order.contacts"></ion-input>
           </ion-item>
         </ng-container>
-        <ng-container *ngIf="order.select == 'Детская'">
+        <ng-container *ngIf="order.select == 'Счастливый ребёнок'">
           <ion-item text-wrap class="card-remove-inner-padding" no-padding>
-            <ion-label position="stacked" color="primary">Раздел</ion-label>
-            <ion-input type="text" value="В разработке"></ion-input>
+            <ion-label position="stacked" color="primary"
+              >ФИО Ребёнка</ion-label
+            >
+            <ion-input type="text" [value]="order.fio"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Дата рождения Ребёнка</ion-label
+            >
+            <ion-input
+              type="text"
+              [value]="order.birth_date + ' ' + order.birth_time"
+            ></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary">ФИО Мамы</ion-label>
+            <ion-input type="text" [value]="order.fio_parent_one"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Дата рождения Мамы</ion-label
+            >
+            <ion-input
+              type="text"
+              [value]="
+                order.birth_date_parent_one + ' ' + order.birth_time_parent_one
+              "
+            ></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary">ФИО Папы</ion-label>
+            <ion-input type="text" [value]="order.fio_parent_two"></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Дата рождения Папы</ion-label
+            >
+            <ion-input
+              type="text"
+              [value]="
+                order.birth_date_parent_two + ' ' + order.birth_time_parent_two
+              "
+            ></ion-input>
+          </ion-item>
+          <ion-item text-wrap class="card-remove-inner-padding" no-padding>
+            <ion-label position="stacked" color="primary"
+              >Whatsapp или Instagram</ion-label
+            >
+            <ion-input type="text" [value]="order.contacts"></ion-input>
           </ion-item>
         </ng-container>
-
         <ion-item text-wrap class="card-remove-inner-padding" no-padding>
           <ion-label position="stacked" color="primary"
             >Дата консультации</ion-label
