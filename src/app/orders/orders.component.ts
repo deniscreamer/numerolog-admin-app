@@ -1,9 +1,11 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { OrdersService } from './orders.service';
 import { map, delay } from 'rxjs/operators';
 import * as moment from 'moment/moment';
 import 'moment/locale/ru';
+
+import { OrdersService } from './orders.service';
+import { Order } from './orders.model';
 
 @Component({
   selector: 'app-orders',
@@ -24,6 +26,7 @@ export class OrdersComponent implements OnInit, AfterViewInit {
       .getOrders()
       .pipe(
         delay(1000),
+        map(x => x.sort(this.onSortByDate)),
         map(x => x.reverse())
       )
       .subscribe(
@@ -66,5 +69,17 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     } else {
       return false;
     }
+  }
+
+  onSortByDate(a: Order, b: Order): number {
+    const momentDataA = parseFloat(moment(a.date).format('YYYYMMDD'));
+    const momentDataB = parseFloat(moment(b.date).format('YYYYMMDD'));
+    if (momentDataA < momentDataB) {
+      return -1;
+    }
+    if (momentDataA > momentDataB) {
+      return 1;
+    }
+    return 0;
   }
 }
